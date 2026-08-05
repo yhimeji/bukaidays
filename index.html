@@ -6,71 +6,102 @@
 <title>金融システム開発３部 部会スケジュール</title>
 
 <style>
+
 body{
-    font-family: "Yu Gothic",sans-serif;
-    margin:20px;
+    font-family:"Yu Gothic","Meiryo",sans-serif;
+    margin:10px;
     background:#f5f5f5;
 }
 
 h1{
+    font-size:24px;
     margin-bottom:15px;
 }
 
-.card{
+.nextMeetingBox{
+    background:#1976d2;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.nextMeetingTitle{
+    font-size:12px;
+}
+
+.nextMeetingDate{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.table-container{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
     background:white;
-    padding:20px;
     border-radius:10px;
     box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
 table{
-    width:100%;
     border-collapse:collapse;
+    min-width:1400px;
+    width:100%;
 }
 
 th{
-    background:#00A3E0;
+    background:#00a3e0;
     color:white;
-    padding:10px;
-    border:1px solid #999;
+    border:1px solid #666;
+    padding:8px;
+    text-align:center;
+    white-space:nowrap;
 }
 
 td{
-    padding:8px;
-    border:1px solid #999;
+    border:1px solid #666;
+    padding:6px;
+    white-space:nowrap;
 }
 
-tr:hover{
-    background:#f0f8ff;
+tbody tr:hover{
+    background:#f5fbff;
 }
 
-.todayMonth{
-    background:#FFF4CC !important;
+.next-row{
+    background:#dff6dd;
     font-weight:bold;
 }
 
-.nextMeeting{
-    background:#DFF6DD !important;
-}
-
 .note{
-    margin-top:20px;
+    margin-top:15px;
+    background:white;
     padding:15px;
-    background:#fff;
-    border-left:5px solid #00A3E0;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-@media(max-width:1000px){
+@media screen and (max-width:768px){
+
+h1{
+    font-size:18px;
+}
+
+.nextMeetingDate{
+    font-size:20px;
+}
 
 table{
     font-size:12px;
 }
 
-th,td{
-    padding:4px;
+th,
+td{
+    padding:5px;
 }
 
 }
+
 </style>
 </head>
 
@@ -78,7 +109,12 @@ th,td{
 
 <h1>2026年度 金融システム開発３部 部会スケジュール</h1>
 
-<div class="card">
+<div class="nextMeetingBox">
+    <div class="nextMeetingTitle">次回開催</div>
+    <div class="nextMeetingDate" id="nextMeeting"></div>
+</div>
+
+<div class="table-container">
 
 <table id="scheduleTable">
 
@@ -98,6 +134,8 @@ th,td{
 </thead>
 
 <tbody>
+
+<!-- データ行 -->
 
 <tr>
 <td>7月度</td>
@@ -256,52 +294,39 @@ th,td{
 </tr>
 
 </tbody>
+
 </table>
 
+</div>
+
 <div class="note">
-<b>参加メンバー</b><br><br>
+<h3>参加メンバー</h3>
 
-部会：ALL<br><br>
+<p><strong>部会：</strong>ALL</p>
 
+<p>
 姫路・田島DM・徳田GL・塙EX・永島SC<br>
-ACは必要に応じて参加<br><br>
+ACは必要に応じて参加
+</p>
 
-新人育成会：指導者を選定<br>
+<br>
+
+<p>
+指導者を選定<br>
 対象は新人2名<br>
 鶴橋・小林
-</div>
+</p>
 
 </div>
 
 <script>
 
-const rows = document.querySelectorAll("#scheduleTable tbody tr");
+const rows =
+document.querySelectorAll("#scheduleTable tbody tr");
+
 const today = new Date();
 
 let nearestRow = null;
+let nearestDate = null;
 let nearestDiff = Number.MAX_VALUE;
 
-rows.forEach(row => {
-
-    const dateText = row.cells[1].innerText
-        .replace("(金)","");
-
-    const meetingDate = new Date(dateText);
-
-    const diff = meetingDate - today;
-
-    if(diff > 0 && diff < nearestDiff){
-        nearestDiff = diff;
-        nearestRow = row;
-    }
-
-});
-
-if(nearestRow){
-    nearestRow.classList.add("nextMeeting");
-}
-
-</script>
-
-</body>
-</html>
